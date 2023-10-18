@@ -6,10 +6,13 @@ const Header = () => {
       <nav>
         <ul>
           <li>
-            <Link href="/about">Sobre</Link>
+            <Link href="/">Início</Link>
           </li>
           <li>
-            <Link href="/teste">Teste</Link>
+            <Link href="/products">Produtos</Link>
+          </li>
+          <li>
+            <Link href="/about">Sobre</Link>
           </li>
         </ul>
       </nav>
