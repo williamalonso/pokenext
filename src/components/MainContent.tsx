@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
-import Header from "./Header";
+import Navbar from "./Navbar";
 import Footer from "./Footer";
+import styles from '../styles/MainContent.module.css';
 
 interface MainContentProps {
   children: ReactNode;
@@ -9,8 +10,8 @@ interface MainContentProps {
 const MainContent: React.FC<MainContentProps> = ({ children }) => {
   return (
     <>
-      <Header></Header>
-      <div>
+      <Navbar></Navbar>
+      <div className={styles.container__MainContent}>
         {children}
       </div>
       <Footer></Footer>

@@ -1,9 +1,11 @@
+import styles from '../styles/Footer.module.css';
+
 const Footer = () => {
   return (
     <>
-      <div className="flex justify-center">
-        <h1>footer</h1>
-      </div>
+      <footer className={` ${styles.footer} flex justify-center`}>
+        <p>Curso de Next.js &copy; 2023</p>
+      </footer>
     </>
   );
 }
