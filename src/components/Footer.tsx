@@ -1,6 +1,6 @@
 import styles from '../styles/Footer.module.css';
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <>
       <footer className={` ${styles.footer} flex justify-center`}>
