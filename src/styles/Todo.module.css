@@ -2,9 +2,13 @@
   list-style: none;
   width: 500px;
   margin: 1em auto;
+  
 }
-.todolist li {
+.todolist div {
   margin-bottom: 1em;
   padding-bottom: 1em;
   border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
