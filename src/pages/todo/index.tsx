@@ -1,5 +1,6 @@
 import React from "react";
-import styles from '../styles/Todo.module.css';
+import styles from '../../styles/Todo.module.css';
+import Link from "next/link";
 
 interface TodosProps {
   data: any[]; // Defina o tipo de 'data' como um array de qualquer tipo
@@ -25,7 +26,10 @@ const Todos: React.FC<TodosProps> = ( {data} ) => {
       <ul className={ styles.todolist }>
         {
           data.map( (item) => (
-            <li key={item.id}>{item.title}</li>
+            <Link href="">
+              <li key={item.id} className="cursor-pointer">{item.id} - {item.title}</li>
+            </Link>
+            
           ))
         }
       </ul>
