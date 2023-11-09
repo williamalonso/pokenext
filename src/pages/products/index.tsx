@@ -1,7 +1,8 @@
+import React from "react";
 import Header from "@/components/Navbar";
 import '../../styles/globals.css';
 
-const Index = () => {
+const Index: React.FC = () => {
   return (
     <div>
       <Header></Header>

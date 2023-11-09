@@ -1,4 +1,6 @@
-const BluePant = () => {
+import React from "react";
+
+const BluePant: React.FC = () => {
   return ( <h1>bluepant</h1> );
 }
  
