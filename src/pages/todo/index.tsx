@@ -26,7 +26,7 @@ const Todos: React.FC<TodosProps> = ( {data} ) => {
       <ul className={ styles.todolist }>
         {
           data.map( (item) => (
-            <Link href="">
+            <Link href={`/todo/${item.id}`}>
               <li key={item.id} className="cursor-pointer">{item.id} - {item.title}</li>
             </Link>
             
