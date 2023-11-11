@@ -5,7 +5,7 @@ const Home: React.FC = () => {
   return (
     <div>
       <Image src="/images/b.jpg" width={200} height={200} alt="imagem aleatoria"></Image>
-      Hello World
+      Hello World usando App Router
     </div>
   )
 }
