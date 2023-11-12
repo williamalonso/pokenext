@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'; // é usado para definir informações de metadados para suas páginas
 import { Inter } from 'next/font/google'; // Isso importa a fonte 'Inter' do Google Fonts usando o pacote 'next/font/google'.
 import '../styles/globals.css';
-import MainContent from '@/components/MainContent';
 
 //  Isso cria uma instância da fonte 'Inter' com o subconjunto 'latin' e armazena-a na variável inter. Esta fonte será usada para definir a classe de estilo do componente <body> mais tarde.
 const inter = Inter({ subsets: ['latin'] })
@@ -21,9 +20,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={inter.className}>
-        <MainContent>
-          {children}
-        </MainContent>
+        {children}
       </body>
     </html>
   )
