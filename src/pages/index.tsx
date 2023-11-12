@@ -2,7 +2,7 @@ export default function Home() {
   
   return (
     <>
-      <h1>Hello World Next! usando page router</h1>
+      <h1>Hello World Next! <p>usando page router</p></h1>
     </>
   )
 }
