@@ -3,14 +3,18 @@
 import Head from 'next/head';
 import '../styles/globals.css'; // importando estilo global para ser usado em toda a aplicação
 import type { AppProps } from 'next/app';
+import Layout from './components/Layout';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <link rel="icon" href="/images/favicon.ico" />
+        <link rel="shortcut icon" href="/images/favicon.ico" />
+        <title>PokeNext</title>
       </Head>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
 }
