@@ -17,7 +17,7 @@ export async function getStaticProps() {
 
 const Home: React.FC<Pokemon> = ({ data }) => {
   
-  console.log(data);
+  // console.log(data);
 
   return (
     <>
@@ -29,7 +29,7 @@ const Home: React.FC<Pokemon> = ({ data }) => {
       <div className={styles.pokemon_container}>
         {
           data.results.map( (pokemon, index) => (
-            <Card key={index} data={pokemon.name}>
+            <Card key={index} data={pokemon.name} />
           ))
         }
       </div>
