@@ -29,7 +29,7 @@ const Home: React.FC<Pokemon> = ({ data }) => {
       <div className={styles.pokemon_container}>
         {
           data.results.map( (pokemon, index) => (
-            <Card key={index} data={pokemon.name} />
+            <Card key={index} data={pokemon.name} id={index} />
           ))
         }
       </div>

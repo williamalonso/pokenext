@@ -1,4 +1,5 @@
 interface CardProps {
+  id: number;
   data: string;
 }
 
