@@ -1,4 +1,6 @@
 import { getAllPokemons } from "@/api/getAllPokemons";
+import styles from '../styles/Home.module.css';
+import Image from "next/image";
 
 interface Pokemon {
   data: {
@@ -24,19 +26,22 @@ const Home: React.FC<Pokemon> = ({ data }) => {
   console.log(data);
 
   return (
-    <div className="flex justify-center items-center flex-col">
-      <h1>Home page</h1>
-      <br></br>
-      <ul>
+    <>
+      <div className={` flex justify-center items-center flex-col ${styles.title_container}`}>      
+        <h1 className={styles.title}>Poke<span>Next</span></h1>
+        <Image src="/images/pokeball.png" width={50} height={50} alt="Pokenext" />
+        <br></br>
+      </div>
+      <div className={styles.pokemon_container}>
         {
           data.results.map( (pokemon, index) => (
-            <li key={index}>
+            <p key={index}>
               {pokemon.name}
-            </li>
+            </p>
           ))
         }
-      </ul>
-    </div>
+      </div>
+    </>
   )
 }
 export default Home;
