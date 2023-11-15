@@ -1,14 +1,8 @@
 import { getAllPokemons } from "@/api/getAllPokemons";
 import styles from '../styles/Home.module.css';
 import Image from "next/image";
-
-interface Pokemon {
-  data: {
-    results: {
-      name: string;
-    }[];
-  };
-}
+import Pokemon from "@/interfaces/pokemonType";
+import Card from "@/components/Card";
 
 export async function getStaticProps() {
   
@@ -35,9 +29,7 @@ const Home: React.FC<Pokemon> = ({ data }) => {
       <div className={styles.pokemon_container}>
         {
           data.results.map( (pokemon, index) => (
-            <p key={index}>
-              {pokemon.name}
-            </p>
+            <Card key={index} data={pokemon.name}>
           ))
         }
       </div>
