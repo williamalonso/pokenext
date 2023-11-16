@@ -1,9 +1,8 @@
 interface Pokemon {
   data: {
-    results: {
-      name: string;
-    }[];
-  }
+    name: string;
+    url: string;
+  }[];
 }
 
 export default Pokemon;

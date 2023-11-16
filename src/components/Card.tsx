@@ -17,7 +17,7 @@ const Card: React.FC<CardProps> = ( props ) => {
       <h3 className={style.title}>
         {props.data}
       </h3>
-      <Link href="#" className={style.btn}>
+      <Link href={`/pokemon/${props.id + 1}`} className={style.btn}>
         Detalhes
       </Link>
     </div>

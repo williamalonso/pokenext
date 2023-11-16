@@ -6,7 +6,8 @@ import Card from "@/components/Card";
 
 export async function getStaticProps() {
   
-  const data = await getAllPokemons();
+  const res = await getAllPokemons();
+  const data = res.results;
 
   return {
     props: {
@@ -17,7 +18,7 @@ export async function getStaticProps() {
 
 const Home: React.FC<Pokemon> = ({ data }) => {
   
-  // console.log(data);
+  console.log(data);
 
   return (
     <>
@@ -28,7 +29,7 @@ const Home: React.FC<Pokemon> = ({ data }) => {
       </div>
       <div className={styles.pokemon_container}>
         {
-          data.results.map( (pokemon, index) => (
+          data.map( (pokemon, index) => (
             <Card key={index} data={pokemon.name} id={index} />
           ))
         }
