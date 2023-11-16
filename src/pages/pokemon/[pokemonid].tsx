@@ -6,11 +6,18 @@ interface Pokemon {
   url: string;
 }
 
+interface PokemonDetailProps {
+  pokemon: {
+    name: string;
+    // Adicione outras propriedades do Pokémon conforme necessário
+  };
+}
+
 export async function getStaticPaths() {
   
   try {
     
-    const maxPokemons = 10;
+    const maxPokemons = 11;
     const api = 'https://pokeapi.co/api/v2/pokemon/'
   
     const res = await fetch(`${api}/?limit=${maxPokemons}`)
@@ -18,12 +25,10 @@ export async function getStaticPaths() {
 
     console.log(data);
 
-   // params
-    const paths = data.results.map((_pokemon, index) => {
-      return {
-        params: { pokemonId: (index + 1).toString() },
-      }
-    })
+    // params
+    const paths = data.results.map((_pokemon, index) => ({
+      params: { pokemonId: index.toString() },
+    }));
 
     return {
       paths,
@@ -41,6 +46,13 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: GetStaticPropsContext) {
 
   const id = context.params?.pokemonId;
+
+  if (!id) {
+    console.error("ID do Pokémon não encontrado nos parâmetros.");
+    return {
+      notFound: true,
+    };
+  }
 
   try {
     
@@ -67,10 +79,11 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
 }
 
-const pokemonDetail: React.FC = () => {
+const pokemonDetail: React.FC<PokemonDetailProps> = ({ pokemon }) => {
   return(
     <>
       <h1>pagina detalhes</h1>
+      <p>{pokemon.name}</p>
       <Link href="/">Voltar</Link>
     </>
   );
