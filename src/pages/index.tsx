@@ -18,7 +18,7 @@ export async function getStaticProps() {
 
 const Home: React.FC<Pokemon> = ({ data }) => {
   
-  console.log(data);
+  // console.log(data);
 
   return (
     <>

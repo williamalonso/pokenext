@@ -7,44 +7,68 @@ import { GetStaticPropsContext } from "next";
 //   data: any;
 // }
 
-// export async function getStaticPaths() {
+export async function getStaticPaths() {
 
-//   const maxPokemons = 10;
-//   const apiUrl = 'https://pokeapi.co/api/v2/pokemon';
-//   const res = await fetch(`${apiUrl}?limit=${maxPokemons}`);
-//   const data: Pokemon[] = await res.json();
-//   console.log(data);
+  try {
+    // Certifique-se de que a função getAllPokemons está definida corretamente
+    const res: Pokemon[] = await getAllPokemons();
 
-//   const paths = pokemons.map( (pokemon, index) => ({
-//     params: {
-//       pokemonId: String(index+1)
-//     }
-//   }) );
+    if (!Array.isArray(res)) {
+      throw new Error("A resposta não é um array.");
+    }
 
-//   return {
-//     paths,
-//     fallback: false,
-//   }
-// }
+    const paths = res.map((pokemon, index) => ({
+      params: {
+        pokemonId: String(index + 1),
+      },
+    }));
 
-// export async function getStaticProps(context: GetStaticPropsContext) {
+    return {
+      paths,
+      fallback: false,
+    };
+  } catch (error) {
+    console.error("Erro ao obter os paths:", error);
+    return {
+      paths: [],
+      fallback: false,
+    };
+  }
 
-//   const { params } = context;
+}
 
-//   if(!params || !params.pokemonId) {
-//     throw new Error('Parâmetro pokemonId não encontrado na url');
-//   }
+export async function getStaticProps(context: GetStaticPropsContext) {
 
-//   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.pokemonId}`);
-//   const data = await res.json();
+  const { params } = context;
 
-//   return {
-//     props: {
-//       data,
-//     }
-//   }
+  try {
+    if (!params || typeof params.pokemonId !== 'string') {
+      throw new Error("Parâmetros inválidos.");
+    }
 
-// }
+    const pokemonId = parseInt(params.pokemonId, 10);
+    const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Erro ao buscar detalhes do Pokémon ${pokemonId}.`);
+    }
+
+    const pokemonDetails = await response.json();
+
+    return {
+      props: {
+        pokemonDetails,
+      },
+    };
+  } catch (error) {
+    console.error("Erro ao obter detalhes do Pokémon:", error);
+    return {
+      props: {},
+    };
+  }
+
+}
 
 const pokemonDetail: React.FC = () => {
   // console.log(data);
