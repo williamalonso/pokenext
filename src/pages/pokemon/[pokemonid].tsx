@@ -1,72 +1,68 @@
 import Link from "next/link";
-import { getAllPokemons } from "@/api/getAllPokemons";
-import Pokemon from "@/interfaces/pokemonType";
 import { GetStaticPropsContext } from "next";
 
-// interface dataProps {
-//   data: any;
-// }
+interface Pokemon {
+  name: string;
+  url: string;
+}
 
 export async function getStaticPaths() {
-  console.log('teste1');
+  
   try {
-    // Certifique-se de que a função getAllPokemons está definida corretamente
-    const res: Pokemon[] = await getAllPokemons();
+    
+    const maxPokemons = 10;
+    const api = 'https://pokeapi.co/api/v2/pokemon/'
+  
+    const res = await fetch(`${api}/?limit=${maxPokemons}`)
+    const data: { count: number; results: Pokemon[] } = await res.json();
 
-    if (!Array.isArray(res)) {
-      throw new Error("A resposta não é um array.");
-    }
+    console.log(data);
 
-    const paths = res.map((pokemon, index) => ({
-      params: {
-        pokemonId: String(index + 1),
-      },
-    }));
+   // params
+    const paths = data.results.map((_pokemon, index) => {
+      return {
+        params: { pokemonId: (index + 1).toString() },
+      }
+    })
 
     return {
       paths,
       fallback: false,
     };
+
   } catch (error) {
+
     console.error("Erro ao obter os paths:", error);
-    return {
-      paths: [],
-      fallback: false,
-    };
+    
   }
 
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
 
-  const { params } = context;
-  console.log('teste');
+  const id = context.params?.pokemonId;
 
   try {
-    if (!params || typeof params.pokemonId !== 'string') {
-      throw new Error("Parâmetros inválidos.");
+    
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+  
+    const data = await res.json();
+
+    if (!data) {
+      console.error("Dados do Pokémon não encontrados.");
+      return {
+        notFound: true,
+      };
     }
-
-    const pokemonId = parseInt(params.pokemonId);
-    const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      throw new Error(`Erro ao buscar detalhes do Pokémon ${pokemonId}.`);
-    }
-
-    const pokemonDetails = await response.json();
-
+  
     return {
-      props: {
-        pokemonDetails,
-      },
-    };
+      props: { pokemon: data },
+    }
+
   } catch (error) {
+
     console.error("Erro ao obter detalhes do Pokémon:", error);
-    return {
-      props: {},
-    };
+    
   }
 
 }
