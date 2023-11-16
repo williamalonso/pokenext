@@ -8,7 +8,7 @@ import { GetStaticPropsContext } from "next";
 // }
 
 export async function getStaticPaths() {
-
+  console.log('teste1');
   try {
     // Certifique-se de que a função getAllPokemons está definida corretamente
     const res: Pokemon[] = await getAllPokemons();
@@ -40,13 +40,14 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: GetStaticPropsContext) {
 
   const { params } = context;
+  console.log('teste');
 
   try {
     if (!params || typeof params.pokemonId !== 'string') {
       throw new Error("Parâmetros inválidos.");
     }
 
-    const pokemonId = parseInt(params.pokemonId, 10);
+    const pokemonId = parseInt(params.pokemonId);
     const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
     const response = await fetch(url);
 
@@ -71,7 +72,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 }
 
 const pokemonDetail: React.FC = () => {
-  // console.log(data);
   return(
     <>
       <h1>pagina detalhes</h1>
