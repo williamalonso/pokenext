@@ -3,6 +3,7 @@ import { GetStaticPropsContext } from "next";
 import pokemonDetail from "@/interfaces/pokemonDetail";
 import Image from "next/image";
 import styles from "../../styles/Pokemon.module.css";
+import { useRouter } from "next/router";
 
 interface Pokemon {
   name: string;
@@ -28,7 +29,7 @@ export async function getStaticPaths() {
 
     return {
       paths,
-      fallback: false,
+      fallback: true,
     };
 
   } catch (error) {
@@ -78,6 +79,12 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 const pokemonDetail: React.FC<pokemonDetail> = ({ pokemon }) => {
 
   // console.log(pokemon);
+
+  const router = useRouter();
+
+  if(router.isFallback) {
+    return <div>Carregando...</div>
+  }
 
   return(
     <>
