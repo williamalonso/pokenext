@@ -19,7 +19,7 @@ export async function getStaticPaths() {
     const res = await fetch(`${api}/?limit=${maxPokemons}`)
     const data: { count: number; results: Pokemon[] } = await res.json();
 
-    console.log(data);
+    // console.log(data);
 
     // params
     const paths = data.results.map((_pokemon, index) => ({
@@ -77,7 +77,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
 const pokemonDetail: React.FC<pokemonDetail> = ({ pokemon }) => {
 
-  console.log(pokemon);
+  // console.log(pokemon);
 
   return(
     <>
