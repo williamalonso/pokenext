@@ -13,7 +13,7 @@ export async function getStaticPaths() {
   
   try {
     
-    const maxPokemons = 11;
+    const maxPokemons = 10;
     const api = 'https://pokeapi.co/api/v2/pokemon/'
   
     const res = await fetch(`${api}/?limit=${maxPokemons}`)
@@ -23,7 +23,7 @@ export async function getStaticPaths() {
 
     // params
     const paths = data.results.map((_pokemon, index) => ({
-      params: { pokemonId: index.toString() },
+      params: { pokemonId: (index+1).toString() },
     }));
 
     return {
@@ -84,7 +84,7 @@ const pokemonDetail: React.FC<pokemonDetail> = ({ pokemon }) => {
       <div className={styles.pokemon_container}>
       <h1 className={styles.title}>{pokemon.name}</h1>
       <Image
-        src={`https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemon.id + 1}.svg`}
+        src={`https://unpkg.com/pokeapi-sprites@2.0.2/sprites/pokemon/other/dream-world/${pokemon.id}.svg`}
         width="200"
         height="200"
         alt={pokemon.name}
